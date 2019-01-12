@@ -29,20 +29,49 @@ var createButton = function() {
 // on click of the submit button, take the html form input and push it to the 'animals' array
 $(document.body).on("click", "#add-animal", function(){
     event.preventDefault();
-    // Grab the input from the textbox
+    // Grab the input from the textbox 
     var newAnimal = $("#animal-input").val().trim();
     // adding the animal input from the textbox to our "animals" array
     animals.push(newAnimal);
     // call the createButton function to process the new item that has been put into the animals array
-    console.log(newAnimal)
     createButton();
+    // console.log the new animal
+    console.log(newAnimal)
 
 });
+
 // on click of an animal button: 
+$(document.body).on("click", "button", function() {
+    var animalClicked = $(this).attr("data-name");
+    // create the query URL
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animalClicked + "&api_key=fk15UAOOrgq9oDZfXGgEc9XPVbDuh715&limit=10"
+    
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+        var results = response.data
+        
+        // for loop to go through each item in response.data
+        for (i = 0; i < results.length; i++) {
+           
+            // create an img div for the gif to go to
+            var animalGif = $("<img>");
+            animalGif.attr("src", results[i].images.fixed_height.url);
+            // get the rating for each gif and set it to var rating
+            var rating = results[i].rating;
+            // put the rating in a p tag
+            var p = $("<p>").text(`Rating: ${rating}`);
+            // put the image div and the p div into the "#gifContainer" div
+            $("#gifContainer").prepend(p);
+            $("#gifContainer").prepend(animalGif);
 
-    // display 10 gifs related to that animal
+        }
+    })
 
-        // play the gif when you click on it, stop the gif when you click it again
+})
+    // play the gif when you click on it, stop the gif when you click it again
 
     // display the gif's rating
 
