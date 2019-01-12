@@ -51,11 +51,15 @@ $(document.body).on("click", "button", function() {
         method: "GET"
     }).then(function(response) {
         console.log(response);
-        var results = response.data
+        var results = response.data;
+        // empty the div with the previous gifs before the new gifs are loaded 
+        $("#gifContainer").empty();
         
         // for loop to go through each item in response.data
         for (i = 0; i < results.length; i++) {
-           
+            //DISPLAY THE RATING AND GIF
+            // create a div for the gif and its information
+            var gifDiv = $("<div>")
             // create an img div for the gif to go to
             var animalGif = $("<img>");
             animalGif.attr("src", results[i].images.fixed_height.url);
@@ -63,17 +67,17 @@ $(document.body).on("click", "button", function() {
             var rating = results[i].rating;
             // put the rating in a p tag
             var p = $("<p>").text(`Rating: ${rating}`);
-            // put the image div and the p div into the "#gifContainer" div
-            $("#gifContainer").prepend(p);
-            $("#gifContainer").prepend(animalGif);
+            // put the image div and the p div into the "gifDiv" div
+            gifDiv.prepend(p);
+            gifDiv.prepend(animalGif);
+            // put the gifDiv div into the "#gifContainer" div in your html
+            $("#gifContainer").prepend(gifDiv)
 
         }
     })
 
 })
     // play the gif when you click on it, stop the gif when you click it again
-
-    // display the gif's rating
 
     // ***display the gif's title
 
