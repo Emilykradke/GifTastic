@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>GifTastic</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     </head>
+
     <body>
+        <nav></nav>
+    
+        <div>
+            <form id="animal-form">
+                <input type="text" class="form-control" id="animal-input" placeholder="Add a new animal here ">
+                <input id="add-animal" type="submit" value="submit">
+            </form>
+        
+        <div id="buttons"></div>
 
-        <div id="content">
-            <nav></nav>
+        <div id="gifContainer"></div>
 
-            <div>
-                <form id="animal-form">
-                    <input type="text" class="form-control" id="animal-input" placeholder="Type a new animal here">
-                    <input id="add-animal" type="submit" value="submit">
-                </form>
-            </div>
-
-            <div id="buttons"></div>
-
-            <div id="gifContainer"></div>
-        </div>
-
-        <script type="text/javascript" src="assets/javascript/giphy.js"></script>
+        <script type="text/javascript" src="assets/JavaScript/giphy.js"></script>
     </body>
 </html>
