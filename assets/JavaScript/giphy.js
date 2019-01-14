@@ -11,7 +11,7 @@ var createButton = function() {
 
     // loop through the array and make buttons for them
     for(var i = 0; i < animals.length; i++) {
-        
+
         // create the button div
         var butt = $("<button>");
         // add a class of animal-button to the buttons
@@ -35,6 +35,8 @@ $(document.body).on("click", "#add-animal", function(){
     animals.push(newAnimal);
     // call the createButton function to process the new item that has been put into the animals array
     createButton();
+    // clear text box
+    $("#animal-input").val("");
     // console.log the new animal
     console.log(newAnimal)
 
@@ -62,21 +64,53 @@ $(document.body).on("click", "button", function() {
             var gifDiv = $("<div>")
             // create an img div for the gif to go to
             var animalGif = $("<img>");
-            animalGif.attr("src", results[i].images.fixed_height.url);
+
+            var animated = results[i].images.fixed_height.url;
+            var still = results[i].images.downsized_still.url;
+            
+            animalGif.attr("src", still);
+            animalGif.attr("data-still", still);
+            animalGif.attr("data-animated", animated);
+            animalGif.attr("data-state", 'still');
+            animalGif.addClass("imageGif");
+            animalGif.attr("height", '300');
+            animalGif.attr("width", '300');
+
+            // get the title for each gif and set it to var title
+            var title = results[i].title;
+            // put the rating in a p tag with id of gifTitle
+            var pTitle = $("<p>").text(title);
             // get the rating for each gif and set it to var rating
             var rating = results[i].rating;
             // put the rating in a p tag
-            var p = $("<p>").text(`Rating: ${rating}`);
-            // put the image div and the p div into the "gifDiv" div
-            gifDiv.prepend(p);
+            var pRating = $("<p>").text(`Rated: ${rating}`);
+            // put the image div, the p div, and title div into the "gifDiv" div
+            gifDiv.prepend(pRating);
             gifDiv.prepend(animalGif);
+            gifDiv.prepend(pTitle);
             // put the gifDiv div into the "#gifContainer" div in your html
-            $("#gifContainer").prepend(gifDiv)
+            $("#gifContainer").prepend(gifDiv);
 
         }
     })
 
 })
+
+$(document.body).on("click", ".imageGif", function() {
+    var state = $(this).attr("data-state")
+    var animatedGifURL = $(this).attr("data-animated")
+    var stillGifURL = $(this).attr("data-still")
+    var gifSrc = $(this).attr("src")
+
+    if(state === 'still') {
+        state = $(this).attr("src", animatedGifURL);
+        $(this).attr("data-state", 'animated')
+    } else if(state === 'animated') {
+        state = $(this).attr("src", stillGifURL);
+        $(this).attr("data-state", 'still')
+    }
+})
+
     // play the gif when you click on it, stop the gif when you click it again
 
     // ***display the gif's title

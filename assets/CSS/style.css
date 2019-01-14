@@ -1,0 +1,36 @@
+body {
+    /* background-color: black; */
+    width: 960px;
+    margin: auto;
+}
+
+#animal-input {
+    width: 85%;
+    height: 35px;
+}
+
+#animal-form {
+    margin: 10px 0px;
+}
+
+#add-animal {
+    height: 35px;
+    width: 13%;
+}
+
+.animal-button {
+    margin: 0px 15px 15px 0px;
+}
+
+.animal-button:first-child {
+    /* border-left: 0;
+    padding-left: 0; */
+    margin-left: 0;
+}
+
+#gifContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* flex-flow: space-around; */
+}
