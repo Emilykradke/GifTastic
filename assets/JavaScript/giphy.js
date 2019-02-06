@@ -74,7 +74,7 @@ $(document.body).on("click", "button", function() {
             animalGif.attr("data-state", 'still');
             animalGif.addClass("imageGif");
             animalGif.attr("height", '300');
-            animalGif.attr("width", '300');
+            animalGif.attr("width", '400');
 
             // get the title for each gif and set it to var title
             var title = results[i].title;
